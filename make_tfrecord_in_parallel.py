@@ -80,12 +80,12 @@ def write_to_tfrecord(img_paths, labels, out_path, img_size, n_prod_process):
                   .format(get_count, (e - s) / span))
             s = e
 
+    print("Done writing all ({:,} of {:,}) images in {:.02f} seconds."
+          .format(get_count, data_len, time.time() - s_total))
     # Finalize
     writer.close()
     for p in prod_ps:
         p.join()
-    print("Done writing all ({:,} of {:,}) images in {:.02f} seconds."
-          .format(get_count, data_len, time.time() - s_total))
 
 
 def main(img_label_file, out_path, img_size=256, n_processes=1):
